@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AppCadastrosRouteImport } from './routes/_app/cadastros'
+import { Route as AppCobrancasRouteImport } from './routes/_app/cobrancas'
+import { Route as AppExtratoRouteImport } from './routes/_app/extrato'
 import { Route as AppPainelRouteImport } from './routes/_app/painel'
 
 const IndexRoute = IndexRouteImport.update({
@@ -34,6 +36,16 @@ const AppCadastrosRoute = AppCadastrosRouteImport.update({
   path: '/cadastros',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCobrancasRoute = AppCobrancasRouteImport.update({
+  id: '/cobrancas',
+  path: '/cobrancas',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppExtratoRoute = AppExtratoRouteImport.update({
+  id: '/extrato',
+  path: '/extrato',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppPainelRoute = AppPainelRouteImport.update({
   id: '/painel',
   path: '/painel',
@@ -44,12 +56,16 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/cadastros': typeof AppCadastrosRoute
+  '/cobrancas': typeof AppCobrancasRoute
+  '/extrato': typeof AppExtratoRoute
   '/painel': typeof AppPainelRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/cadastros': typeof AppCadastrosRoute
+  '/cobrancas': typeof AppCobrancasRoute
+  '/extrato': typeof AppExtratoRoute
   '/painel': typeof AppPainelRoute
 }
 export interface FileRoutesById {
@@ -58,14 +74,25 @@ export interface FileRoutesById {
   '/_app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
   '/_app/cadastros': typeof AppCadastrosRoute
+  '/_app/cobrancas': typeof AppCobrancasRoute
+  '/_app/extrato': typeof AppExtratoRoute
   '/_app/painel': typeof AppPainelRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/cadastros' | '/painel'
+  fullPaths:
+    '/' | '/login' | '/cadastros' | '/cobrancas' | '/extrato' | '/painel'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/cadastros' | '/painel'
-  id: '__root__' | '/' | '/_app' | '/login' | '/_app/cadastros' | '/_app/painel'
+  to: '/' | '/login' | '/cadastros' | '/cobrancas' | '/extrato' | '/painel'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/login'
+    | '/_app/cadastros'
+    | '/_app/cobrancas'
+    | '/_app/extrato'
+    | '/_app/painel'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -104,6 +131,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCadastrosRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/cobrancas': {
+      id: '/_app/cobrancas'
+      path: '/cobrancas'
+      fullPath: '/cobrancas'
+      preLoaderRoute: typeof AppCobrancasRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/extrato': {
+      id: '/_app/extrato'
+      path: '/extrato'
+      fullPath: '/extrato'
+      preLoaderRoute: typeof AppExtratoRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/painel': {
       id: '/_app/painel'
       path: '/painel'
@@ -116,11 +157,15 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteChildren {
   AppCadastrosRoute: typeof AppCadastrosRoute
+  AppCobrancasRoute: typeof AppCobrancasRoute
+  AppExtratoRoute: typeof AppExtratoRoute
   AppPainelRoute: typeof AppPainelRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppCadastrosRoute: AppCadastrosRoute,
+  AppCobrancasRoute: AppCobrancasRoute,
+  AppExtratoRoute: AppExtratoRoute,
   AppPainelRoute: AppPainelRoute,
 }
 
