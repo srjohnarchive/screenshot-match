@@ -39,11 +39,11 @@ function FormDialog({ tabela, campos, registro, onClose }: { tabela: Tabela; cam
     e.preventDefault();
     const dados: Record<string, any> = {};
     campos.forEach((c) => (dados[c.k] = v[c.k] === "" ? null : v[c.k]));
-    const q = registro?.id
-      ? supabase.from(tabela).update(dados as never).eq("id", registro.id)
+    const q = registro?.["id"]
+      ? supabase.from(tabela).update(dados as never).eq("id", registro["id"])
       : supabase.from(tabela).insert(dados as never);
     const { error } = await q;
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Salvo");
     inv();
     onClose();
@@ -52,7 +52,7 @@ function FormDialog({ tabela, campos, registro, onClose }: { tabela: Tabela; cam
     <Dialog open onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{registro?.id ? "Editar" : "Novo registro"}</DialogTitle>
+          <DialogTitle>{registro?.["id"] ? "Editar" : "Novo registro"}</DialogTitle>
         </DialogHeader>
         <form onSubmit={salvar} className="space-y-4">
           {campos.map((c) => (
@@ -100,7 +100,7 @@ function Secao<T extends { id: string }>({
   const inv = useInvalidar();
   async function alternar(x: any) {
     const { error } = await supabase.from(tabela).update({ [ativoKey]: !x[ativoKey] } as never).eq("id", x.id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     inv();
   }
   return (
@@ -163,13 +163,13 @@ function Usuarios() {
   });
   async function mudar(id: string, role: "admin" | "tesouraria" | "consulta") {
     const { error } = await supabase.rpc("definir_perfil", { _user_id: id, _role: role });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Perfil atualizado");
     inv();
   }
   async function ativo(u: any) {
     const { error } = await supabase.from("usuarios").update({ ativo: !u.ativo }).eq("id", u.id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     inv();
   }
   return (
