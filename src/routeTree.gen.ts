@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as AppCadastrosRouteImport } from './routes/_app/cadastros'
 import { Route as AppPainelRouteImport } from './routes/_app/painel'
 
 const IndexRoute = IndexRouteImport.update({
@@ -28,6 +29,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppCadastrosRoute = AppCadastrosRouteImport.update({
+  id: '/cadastros',
+  path: '/cadastros',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppPainelRoute = AppPainelRouteImport.update({
   id: '/painel',
   path: '/painel',
@@ -37,11 +43,13 @@ const AppPainelRoute = AppPainelRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/cadastros': typeof AppCadastrosRoute
   '/painel': typeof AppPainelRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/cadastros': typeof AppCadastrosRoute
   '/painel': typeof AppPainelRoute
 }
 export interface FileRoutesById {
@@ -49,14 +57,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
+  '/_app/cadastros': typeof AppCadastrosRoute
   '/_app/painel': typeof AppPainelRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/painel'
+  fullPaths: '/' | '/login' | '/cadastros' | '/painel'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/painel'
-  id: '__root__' | '/' | '/_app' | '/login' | '/_app/painel'
+  to: '/' | '/login' | '/cadastros' | '/painel'
+  id: '__root__' | '/' | '/_app' | '/login' | '/_app/cadastros' | '/_app/painel'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -88,6 +97,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/cadastros': {
+      id: '/_app/cadastros'
+      path: '/cadastros'
+      fullPath: '/cadastros'
+      preLoaderRoute: typeof AppCadastrosRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/painel': {
       id: '/_app/painel'
       path: '/painel'
@@ -99,10 +115,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppCadastrosRoute: typeof AppCadastrosRoute
   AppPainelRoute: typeof AppPainelRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppCadastrosRoute: AppCadastrosRoute,
   AppPainelRoute: AppPainelRoute,
 }
 
