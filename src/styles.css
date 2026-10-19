@@ -46,9 +46,9 @@
   --color-success-foreground: var(--success-foreground);
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
-  --font-display: var(--font-display);
+  --font-sans: var(--app-sans);
+  --font-mono: var(--app-mono);
+  --font-display: var(--app-display);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -70,9 +70,9 @@
 
 :root {
   --radius: 0.375rem;
-  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
-  --font-display: "Fraunces", Georgia, serif;
+  --app-sans: "IBM Plex Sans", system-ui, sans-serif;
+  --app-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --app-display: "Fraunces", Georgia, serif;
   --background: oklch(0.975 0.008 85);
   --foreground: oklch(0.22 0.03 160);
   --card: oklch(0.99 0.004 85);
@@ -154,8 +154,8 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: var(--font-sans);
+    font-family: var(--app-sans);
   }
-  h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.01em; }
-  .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  h1, h2, h3 { font-family: var(--app-display); letter-spacing: -0.01em; }
+  .num { font-family: var(--app-mono); font-variant-numeric: tabular-nums; }
 }
