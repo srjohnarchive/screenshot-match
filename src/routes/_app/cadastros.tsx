@@ -208,7 +208,7 @@ function Cadastros() {
     <div className="space-y-6">
       <h1 className="text-3xl">Cadastros</h1>
       <Tabs defaultValue="terceiros">
-        <TabsList>
+        <TabsList className="h-auto w-full justify-start gap-1 overflow-x-auto rounded-none border-b border-border bg-transparent p-0 pb-3 [&>button]:shrink-0 [&>button]:px-4 [&>button]:py-2 [&>button]:data-[state=active]:bg-accent [&>button]:data-[state=active]:text-primary">
           <TabsTrigger value="terceiros">Clientes e fornecedores</TabsTrigger>
           <TabsTrigger value="contas">Contas financeiras</TabsTrigger>
           <TabsTrigger value="categorias">Categorias</TabsTrigger>
